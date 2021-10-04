@@ -11,4 +11,5 @@ public interface CountryService {
 
     Country get(long id);
 
+    Country update(Country country, long id);
 }

@@ -31,4 +31,12 @@ public class CoutryServiceImpl implements CountryService {
     public List<Country> getAll() {
         return countryRepository.findAll();
     }
+
+    @Override
+    public Country update(Country country, long id) {
+        Country existingCountry = countryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Country", "id", id));
+        existingCountry.setName(country.getName());
+        countryRepository.save(existingCountry);
+        return null;
+    }
 }
