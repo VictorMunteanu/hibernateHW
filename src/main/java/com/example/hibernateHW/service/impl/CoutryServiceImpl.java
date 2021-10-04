@@ -39,4 +39,10 @@ public class CoutryServiceImpl implements CountryService {
         countryRepository.save(existingCountry);
         return null;
     }
+
+    @Override
+    public void delete(long id) {
+        countryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Country", "id", id));
+        countryRepository.deleteById(id);
+    }
 }
