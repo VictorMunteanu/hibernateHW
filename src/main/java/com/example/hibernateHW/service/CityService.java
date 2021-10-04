@@ -1,4 +1,7 @@
 package com.example.hibernateHW.service;
 
-public class CityService {
+import com.example.hibernateHW.model.City;
+
+public interface CityService {
+    City save(City city);
 }
