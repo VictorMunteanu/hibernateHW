@@ -1,15 +1,18 @@
 package com.example.hibernateHW.service.impl;
 
+import com.example.hibernateHW.exception.ResourceNotFoundException;
 import com.example.hibernateHW.model.Country;
 import com.example.hibernateHW.repository.CountryRepository;
 import com.example.hibernateHW.service.CountryService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CoutryServiceImpl implements CountryService {
     CountryRepository countryRepository;
 
-    public CountryServiceImpl(CountryRepository countryRepository) {
+    public CoutryServiceImpl(CountryRepository countryRepository) {
         super();
         this.countryRepository = countryRepository;
     }
@@ -19,4 +22,13 @@ public class CoutryServiceImpl implements CountryService {
         return countryRepository.save(country);
     }
 
+    @Override
+    public Country get(long id) {
+        return countryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Country", "id", id));
+    }
+
+    @Override
+    public List<Country> getAll() {
+        return countryRepository.findAll();
+    }
 }
