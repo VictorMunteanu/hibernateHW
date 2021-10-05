@@ -1,8 +1,10 @@
 package com.example.hibernateHW.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -18,4 +20,12 @@ public class Country {
 
     @Column(name = "code")
     private String code;
+
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<City> cities;
+
+    @JsonManagedReference
+    public List<City> getCities() {
+        return cities;
+    }
 }
